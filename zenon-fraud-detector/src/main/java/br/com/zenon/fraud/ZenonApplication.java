@@ -15,6 +15,8 @@ public class ZenonApplication {
         .limit(10)
         .forEach(System.out::println);
 
+//    Transaction t = new Transaction(1, "PAYMENT", null, null, null, "0", "0");
+//    System.out.println(t);
   }
 
 

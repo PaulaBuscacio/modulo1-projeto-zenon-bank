@@ -38,7 +38,7 @@ public class TransactionIngestor {
       String[] fields = line.split(",");
       TransactionCustomer originTransactionCustomer = new TransactionCustomer(fields[3], new BigDecimal(fields[4]), new BigDecimal(fields[5]));
       TransactionCustomer destTransactionCustomer = new TransactionCustomer(fields[6], new BigDecimal(fields[7]), new BigDecimal(fields[8]));
-      transactions.add(Transaction.createTransaction(Integer.valueOf(fields[0]), fields[1], new BigDecimal(fields[2]), originTransactionCustomer, destTransactionCustomer, fields[9], fields[10]));
+      transactions.add(new Transaction(Integer.valueOf(fields[0]), fields[1], new BigDecimal(fields[2]), originTransactionCustomer, destTransactionCustomer, fields[9], fields[10]));
     }
 
     return transactions.reversed();

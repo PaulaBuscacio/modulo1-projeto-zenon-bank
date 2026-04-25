@@ -1,6 +1,7 @@
 package br.com.zenon.fraud.domain;
 
 import java.math.BigDecimal;
+import java.util.Objects;
 
 public record Transaction(Integer step,
                           TransactionTypeEnum type,
@@ -10,9 +11,9 @@ public record Transaction(Integer step,
                           Boolean isFraud,
                           Boolean isFlaggedFraud) {
 
-  public static Transaction createTransaction(Integer step, String type, BigDecimal amount, TransactionCustomer origin, TransactionCustomer recipient, String isFraud, String isFlaggedFraud) {
-    return new Transaction(step, TransactionTypeEnum.valueOf(type), amount, origin, recipient, convertToBoolean(isFraud), convertToBoolean(isFlaggedFraud));
 
+  public  Transaction (Integer step, String type, BigDecimal amount, TransactionCustomer origin, TransactionCustomer recipient, String isFraud, String isFlaggedFraud) {
+    this(step, TransactionTypeEnum.valueOf(type), amount, origin, recipient, convertToBoolean(isFraud), convertToBoolean(isFlaggedFraud));
   }
 
   private static Boolean convertToBoolean(String value) {
@@ -23,6 +24,6 @@ public record Transaction(Integer step,
     } else {
       return Boolean.FALSE;
     }
-
   }
+
 }
