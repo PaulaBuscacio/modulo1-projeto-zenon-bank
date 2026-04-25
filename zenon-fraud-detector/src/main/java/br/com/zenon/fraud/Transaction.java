@@ -21,12 +21,12 @@ public record Transaction(int step,
         "\tstep: " + step +
             "\n\ttype: " + type +
             "\n\tamount: " + amount +
-            "\n\tnameOrig: " + originCustomer.nameOrig() +
-            "\n\toldbalanceOrg: " + originCustomer.oldbalanceOrg() +
-            "\n\tnewbalanceOrig: " + originCustomer.newbalanceOrig() +
-            "\n\tnameDest: " + destCustomer.nameOrig() +
-            "\n\toldbalanceDest: " + destCustomer.oldbalanceOrg() +
-            "\n\tnewbalanceDest: " + destCustomer.newbalanceOrig() +
+            "\n\tnameOrig: " + originCustomer.name() +
+            "\n\toldbalanceOrg: " + originCustomer.oldbalance() +
+            "\n\tnewbalance: " + originCustomer.newbalance() +
+            "\n\tnameDest: " + destCustomer.name() +
+            "\n\toldbalanceDest: " + destCustomer.oldbalance() +
+            "\n\tnewbalanceDest: " + destCustomer.newbalance() +
             "\n\tisFraud: " + isFraud +
             "\n\tisFlaggedFraud: " + isFlaggedFraud;
   }
