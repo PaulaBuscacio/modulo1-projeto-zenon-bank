@@ -1,11 +1,12 @@
-package br.com.zenon.fraud;
+package br.com.zenon.fraud.domain;
 
 public enum TransactionTypeEnum {
 
   CASH_IN ("CASH_IN"),
   CASH_OUT ("CASH_OUT"),
   DEBIT ("DEBIT"),
-  PAYMENT ("PAYMENT");
+  PAYMENT ("PAYMENT"),
+  TRANSFER("TRANSFER");
 
  private String type;
 
