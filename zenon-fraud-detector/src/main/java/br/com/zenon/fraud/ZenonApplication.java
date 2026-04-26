@@ -5,16 +5,16 @@ import br.com.zenon.fraud.useCase.TransactionIngestor;
 
 import java.util.List;
 
+import static java.lang.IO.println;
+
 public class ZenonApplication {
   static void main() {
 
     TransactionIngestor transactionIngestor = new TransactionIngestor();
-    List<Transaction> transactions = transactionIngestor.extractTransactionFromFile("data/PS_20174392719_1491204439457_log.csv");
+    List<Transaction> transactions = transactionIngestor.extractTransactionFromFile("data/paysim_with_bad_data.csv");
 
-    transactions.stream()
-        .limit(10)
-        .forEach(System.out::println);
-
+    println(transactions.size());
+    println(transactions);
   }
 
 
