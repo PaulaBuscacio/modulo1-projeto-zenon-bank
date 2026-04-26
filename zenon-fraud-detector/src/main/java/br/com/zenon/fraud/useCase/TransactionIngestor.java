@@ -1,14 +1,14 @@
 package br.com.zenon.fraud.useCase;
 
-import br.com.zenon.fraud.domain.TransactionCustomer;
+import br.com.zenon.fraud.domain.vo.TransactionCustomer;
 import br.com.zenon.fraud.domain.Transaction;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.io.IOException;
-import java.math.BigDecimal;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -33,15 +33,19 @@ public class TransactionIngestor {
       return transactions;
     }
     String[] lines = fileAsString.split("\n");
-    for (int i = 1001; i > 0; i--) {
-      String line = lines[i];
-      String[] fields = line.split(",");
-      TransactionCustomer originTransactionCustomer = new TransactionCustomer(fields[3], new BigDecimal(fields[4]), new BigDecimal(fields[5]));
-      TransactionCustomer destTransactionCustomer = new TransactionCustomer(fields[6], new BigDecimal(fields[7]), new BigDecimal(fields[8]));
-      transactions.add(new Transaction(Integer.valueOf(fields[0]), fields[1], new BigDecimal(fields[2]), originTransactionCustomer, destTransactionCustomer, fields[9], fields[10]));
-    }
+    Arrays.stream(lines).filter(line -> line != lines[0])
+        .forEach(line -> {
+          String[] fields = line.split(",");
+          try {
+            TransactionCustomer originTransactionCustomer = new TransactionCustomer(fields[3], fields[4], fields[5]);
+            TransactionCustomer destTransactionCustomer = new TransactionCustomer(fields[6], fields[7], fields[8]);
+            transactions.add(new Transaction(Integer.valueOf(fields[0]), fields[1], fields[2], originTransactionCustomer, destTransactionCustomer, fields[9], fields[10]));
+          } catch (RuntimeException e) {
+            System.err.println("Error: " + line + " | " + e.getClass() + ": " + e.getMessage());
+          }
+        });
 
-    return transactions.reversed();
+    return transactions;
   }
 
 }
