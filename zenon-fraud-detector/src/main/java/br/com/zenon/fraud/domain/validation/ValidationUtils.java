@@ -1,7 +1,7 @@
 package br.com.zenon.fraud.domain.validation;
 
 import java.math.BigDecimal;
-import java.util.Objects;
+import java.util.Optional;
 
 public class ValidationUtils {
 
@@ -20,8 +20,7 @@ public class ValidationUtils {
   }
 
   private static void validateNullOrEmpty(String value, String propertyName) {
-    if (Objects.isNull(value) || value.isBlank()) {
-      throw new IllegalArgumentException(propertyName + " should not be empty");
-    }
+    Optional.ofNullable(value).filter(v -> !v.isBlank()).orElseThrow(() -> new IllegalArgumentException(propertyName + " should not be null"));
+
   }
 }
