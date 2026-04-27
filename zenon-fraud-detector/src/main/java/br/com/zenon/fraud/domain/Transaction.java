@@ -4,7 +4,7 @@ import br.com.zenon.fraud.domain.validation.ValidationUtils;
 import br.com.zenon.fraud.domain.vo.TransactionCustomer;
 
 import java.math.BigDecimal;
-import java.util.Objects;
+import java.util.Optional;
 
 public record Transaction(Integer step,
                           TransactionTypeEnum type,
@@ -20,16 +20,14 @@ public record Transaction(Integer step,
   }
 
   private static Boolean convertToBoolean(String value, String propertyName) {
-    if(Objects.isNull(value)) {
-      throw new IllegalArgumentException(propertyName + " should not be null");
-    }
+
+    Optional.ofNullable(value).orElseThrow(() -> new IllegalArgumentException(propertyName + " should not be null"));
     return value.equals("1");
   }
 
   private static Integer validateStep(Integer step) {
-    if (Objects.isNull(step) || step < 1) {
-      throw new IllegalArgumentException("step should be positive: " + step);
-    }
+
+    Optional.ofNullable(step).filter(v -> v >= 1).orElseThrow(() -> new IllegalArgumentException("step should be positive: " + step));
     return step;
   }
 
