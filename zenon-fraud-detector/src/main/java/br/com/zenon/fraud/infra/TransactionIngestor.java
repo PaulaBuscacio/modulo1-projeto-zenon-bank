@@ -1,4 +1,4 @@
-package br.com.zenon.fraud.useCase;
+package br.com.zenon.fraud.infra;
 
 import br.com.zenon.fraud.domain.vo.TransactionCustomer;
 import br.com.zenon.fraud.domain.Transaction;
@@ -20,7 +20,7 @@ public class TransactionIngestor {
 
   private static Logger log = LoggerFactory.getLogger(TransactionIngestor.class);
 
-  public List<Transaction> extractTransactionFromFile(String fileName) {
+  public List<Transaction> extractTransactionFromFile(String fileName, Integer limit) {
     String fileAsString;
     List<Transaction> transactions = new ArrayList<>();
     try {
@@ -33,7 +33,10 @@ public class TransactionIngestor {
       return transactions;
     }
     String[] lines = fileAsString.split("\n");
-    Arrays.stream(lines).filter(line -> line != lines[0])
+    int maxValue = limit == null ? lines.length - 1 : limit;
+    Arrays.stream(lines)
+        .filter(line -> line != lines[0])
+        .limit(maxValue)
         .forEach(line -> {
           String[] fields = line.split(",");
           try {
