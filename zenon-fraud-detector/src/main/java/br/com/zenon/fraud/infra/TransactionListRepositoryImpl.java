@@ -7,7 +7,7 @@ import java.util.Optional;
 
 import static java.lang.IO.println;
 
-public class TransactionListRepository {
+public class TransactionListRepositoryImpl implements TransactionRepository {
 
   private TransactionIngestor transactionIngestor = new TransactionIngestor();
 
@@ -21,6 +21,13 @@ public class TransactionListRepository {
         () -> println("Transação não encontrada para o cliente " + originName)
     );
 
+  }
+
+  public Long getSearchTimeNameOrigiLastTransaction(String fileName, Integer limit) {
+    Long start = System.nanoTime();
+    transactions.getLast();
+    Long end = System.nanoTime();
+    return end - start;
   }
 
   private Optional<Transaction> getTransaction(String originName) {
