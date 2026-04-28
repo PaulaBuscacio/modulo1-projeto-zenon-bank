@@ -35,7 +35,7 @@ public class TransactionIngestor {
     String[] lines = fileAsString.split("\n");
     int maxValue = limit == null ? lines.length - 1 : limit;
     Arrays.stream(lines)
-        .filter(line -> line != lines[0])
+        .skip(1)
         .limit(maxValue)
         .forEach(line -> {
           String[] fields = line.split(",");
