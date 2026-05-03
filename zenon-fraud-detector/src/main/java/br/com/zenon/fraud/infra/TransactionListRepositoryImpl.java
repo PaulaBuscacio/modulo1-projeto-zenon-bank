@@ -30,6 +30,16 @@ public class TransactionListRepositoryImpl implements TransactionRepository {
     return end - start;
   }
 
+  @Override
+  public Transaction findByOriginName(String originName) {
+    return null;
+  }
+
+  @Override
+  public Transaction save(Transaction transaction) {
+    return null;
+  }
+
   private Optional<Transaction> getTransaction(String originName) {
     return transactions.stream()
         .filter(t -> t.origin().name().equals(originName))
