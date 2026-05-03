@@ -6,17 +6,24 @@ import br.com.zenon.fraud.domain.vo.TransactionCustomer;
 import java.math.BigDecimal;
 import java.util.Optional;
 
-public record Transaction(Integer step,
-                          TransactionTypeEnum type,
-                          BigDecimal amount,
-                          TransactionCustomer origin,
-                          TransactionCustomer recipient,
-                          Boolean isFraud,
-                          Boolean isFlaggedFraud) {
+public record Transaction(
+    Long id,
+    Integer step,
+    TransactionTypeEnum type,
+    BigDecimal amount,
+    TransactionCustomer origin,
+    TransactionCustomer recipient,
+    Boolean isFraud,
+    Boolean isFlaggedFraud) {
 
 
-  public Transaction(Integer step, String type, String amount, TransactionCustomer origin, TransactionCustomer recipient, String isFraud, String isFlaggedFraud) {
-    this(validateStep(step), TransactionTypeEnum.valueOf(type), ValidationUtils.validateValue(amount, "amount"), origin, recipient, convertToBoolean(isFraud, "isFraud"), convertToBoolean(isFlaggedFraud, "isFraudFlagged"));
+  public Transaction(Long id, Integer step, String type, String amount, TransactionCustomer origin, TransactionCustomer recipient, String isFraud, String isFlaggedFraud) {
+    this(id, validateStep(step), TransactionTypeEnum.valueOf(type), ValidationUtils.validateValue(amount, "amount"), origin, recipient, convertToBoolean(isFraud, "isFraud"), convertToBoolean(isFlaggedFraud, "isFraudFlagged"));
+  }
+
+
+  public Transaction( Integer step, String type, String amount, TransactionCustomer origin, TransactionCustomer recipient, String isFraud, String isFlaggedFraud) {
+    this(null, validateStep(step), TransactionTypeEnum.valueOf(type), ValidationUtils.validateValue(amount, "amount"), origin, recipient, convertToBoolean(isFraud, "isFraud"), convertToBoolean(isFlaggedFraud, "isFraudFlagged"));
   }
 
   private static Boolean convertToBoolean(String value, String propertyName) {
