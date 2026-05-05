@@ -1,7 +1,7 @@
 package br.com.zenon.fraud.infra;
 
-import br.com.zenon.fraud.domain.vo.TransactionCustomer;
 import br.com.zenon.fraud.domain.Transaction;
+import br.com.zenon.fraud.domain.vo.TransactionCustomer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -11,8 +11,6 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
-import static java.lang.IO.println;
 
 /**
  * responsável pela ingestão de dados de transaçōes do PaySim.
